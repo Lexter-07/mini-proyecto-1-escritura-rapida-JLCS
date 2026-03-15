@@ -1,25 +1,36 @@
 package com.example.escriturarapida.model;
 
-public class Levels implements ILevels{
+public class Levels implements ILevels {
     public int ActualLevel = 1;
-    private double TiempoBase = 20;
-    private final int ACIERTOS = 10;
-
+    private int TiempoBase = 20;
+    private int Successes = 0;
 
 
     @Override
     public int levelUp() {
-        ActualLevel +=1;
+        ActualLevel += 1;
+        if (Successes < 5) {
+            Successes += 1;
+        } else {
+            Successes = 0;
+        }
+
         return ActualLevel;
     }
 
     @Override
-    public double getTimeLimit() {
-        return 0;
+    public void resetGame() {
+        ActualLevel = 1;
+        TiempoBase = 20;
+
     }
 
     @Override
-    public boolean progress(int aciertosActuales) {
-        return aciertosActuales >= ACIERTOS;
+    public int timeForLevel(){
+        if (Successes == 5){
+            TiempoBase -= 2;
+        }
+        return TiempoBase;
     }
+
 }

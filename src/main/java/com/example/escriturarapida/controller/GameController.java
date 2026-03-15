@@ -20,10 +20,10 @@ import javafx.util.Duration;
 
 public class GameController {
 
-    @FXML  // Label ID si la palabra fue correctamente escrita o no
+    @FXML  // Label ID check if the word was spelled correctly or not
     private Label signLabel;
 
-    @FXML  // Label ID Palabra que debe ser escrita
+    @FXML  // Label ID Word that must be written
     private Label wordLabel;
 
     @FXML  // ID textField
@@ -42,7 +42,7 @@ public class GameController {
     private Levels levels;
 
     private Timeline timeline;
-    private int InitialTime = 10;
+    private final int InitialTime = 20;
     private int TimeLeft = InitialTime;
 
 
@@ -72,18 +72,18 @@ public class GameController {
     }
 
     public void resetTimer(){
-        TimeLeft = InitialTime;
+        TimeLeft = levels.timeForLevel();
         timeLabel.setTextFill(Color.web("#00e5ff"));
         timeLabel.setText("" + TimeLeft);
     }
 
-    @FXML  // Event generado al dar enter en el textField
+    @FXML  // Event generated when enter is pressed in text field
     public void onHandleEnter(ActionEvent event) throws InterruptedException {
         validateButton.fire();
     }
 
 
-    @FXML  // Event generado al dar click en el boton
+    @FXML  // Event generated when the button has clicked
     public void onHandleValidate(ActionEvent event) throws InterruptedException {
 
         String text = wordTextField.getText();
@@ -91,26 +91,30 @@ public class GameController {
         System.out.println("Validando...");
         if (words.validateWord(text)){
             signLabel.setText(" CORRECTO ");
+            signLabel.setTextFill(Color.web("#00ff4d"));
             signLabel.setVisible(true);
             PauseTransition pausa = new PauseTransition(Duration.seconds(2));
 
             pausa.setOnFinished(ActionEvent -> {signLabel.setVisible(false);});
             pausa.play();
+            levelLabel.setText("NIVEL " + levels.levelUp());
 
         } else {
             signLabel.setText("X INCORRECTO X");
+            signLabel.setTextFill(Color.RED);
             signLabel.setVisible(true);
             PauseTransition pausa = new PauseTransition(Duration.seconds(2));
 
             pausa.setOnFinished(ActionEvent -> {signLabel.setVisible(false);});
             pausa.play();
+            levels.resetGame();
+            levelLabel.setText("Nivel "+ levels.ActualLevel);
+
         }
 
         resetTimer();
         wordTextField.clear();
 
-
-        levelLabel.setText("NIVEL " + levels.levelUp());
         wordLabel.setText(words.generateWord());
 
     }

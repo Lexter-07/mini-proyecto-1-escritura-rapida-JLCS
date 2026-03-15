@@ -11,7 +11,7 @@ public class Words implements IWord{
     //Random random;
     int positionWord;
     public Words(){
-        words = new String[30];
+        words = new String[40];
 
         words[0] = "cimarron";
         words[1] = "carne";
@@ -42,6 +42,17 @@ public class Words implements IWord{
         words[26] = "estrambotico";
         words[27] = "palabra";
         words[28] = "tuberculo";
+        words[29] = "acetaminofen";
+        words[30] = "manteca";
+        words[31] = "comcenter";
+        words[32] = "pintucarita";
+        words[33] = "sangre";
+        words[34] = "bilingüe";
+        words[35] = "vidrio";
+        words[36] = "menticol";
+        words[37] = "ferrocaril";
+        words[38] = "chamo";
+        words[39] = "contingencia";
     }
 
 
@@ -61,4 +72,3 @@ public class Words implements IWord{
     }
 
 }
-
