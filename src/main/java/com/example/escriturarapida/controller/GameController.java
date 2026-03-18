@@ -1,9 +1,11 @@
 package com.example.escriturarapida.controller;
 
+import com.example.escriturarapida.Main;
 import com.example.escriturarapida.model.ILevels;
 import com.example.escriturarapida.model.IWord;
 import com.example.escriturarapida.model.Levels;
 import com.example.escriturarapida.model.Words;
+import com.example.escriturarapida.view.Path;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
@@ -16,6 +18,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+
+import java.io.IOException;
 
 
 public class GameController {
@@ -31,6 +35,9 @@ public class GameController {
 
     @FXML  // ID Button
     private Button validateButton;
+
+    @FXML //  ID Button Reset
+    private Button ResetButton;
 
     @FXML  //ID timeLabel
     private Label timeLabel;
@@ -63,7 +70,6 @@ public class GameController {
             }
 
             if (TimeLeft <= 0) {
-                //timeline.stop();
                 validateButton.fire();
             }
         }));
@@ -73,14 +79,23 @@ public class GameController {
 
     public void resetTimer(){
         TimeLeft = levels.timeForLevel();
-        timeLabel.setTextFill(Color.web("#00e5ff"));
+        timeLabel.setTextFill(Color.web("#eeff00"));
         timeLabel.setText("" + TimeLeft);
+    }
+
+    public void transitionValidateWord(){
+        signLabel.setVisible(true);
+        PauseTransition pausa = new PauseTransition(Duration.seconds(2));
+
+        pausa.setOnFinished(ActionEvent -> {signLabel.setVisible(false);});
+        pausa.play();
     }
 
     @FXML  // Event generated when enter is pressed in text field
     public void onHandleEnter(ActionEvent event) throws InterruptedException {
         validateButton.fire();
     }
+
 
 
     @FXML  // Event generated when the button has clicked
@@ -92,23 +107,17 @@ public class GameController {
         if (words.validateWord(text)){
             signLabel.setText(" CORRECTO ");
             signLabel.setTextFill(Color.web("#00ff4d"));
-            signLabel.setVisible(true);
-            PauseTransition pausa = new PauseTransition(Duration.seconds(2));
+            transitionValidateWord();
 
-            pausa.setOnFinished(ActionEvent -> {signLabel.setVisible(false);});
-            pausa.play();
             levelLabel.setText("NIVEL " + levels.levelUp());
 
         } else {
-            signLabel.setText("X INCORRECTO X");
+            signLabel.setText(" INCORRECTO ");
             signLabel.setTextFill(Color.RED);
-            signLabel.setVisible(true);
-            PauseTransition pausa = new PauseTransition(Duration.seconds(2));
+            transitionValidateWord();
 
-            pausa.setOnFinished(ActionEvent -> {signLabel.setVisible(false);});
-            pausa.play();
             levels.resetGame();
-            levelLabel.setText("Nivel "+ levels.ActualLevel);
+            levelLabel.setText("NIVEL "+ levels.ActualLevel);
 
         }
 
@@ -118,5 +127,15 @@ public class GameController {
         wordLabel.setText(words.generateWord());
 
     }
+
+    @FXML
+    public void onHandleReset(ActionEvent event) throws IOException {
+        levels.resetGame();
+        resetTimer();
+        wordTextField.clear();
+        levelLabel.setText("NIVEL "+ levels.ActualLevel);
+    }
+
 }
+
 

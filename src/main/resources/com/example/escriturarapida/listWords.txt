@@ -1,4 +1,0 @@
-1:reja,palo,yoyo,baldosa,carne,cerdo,arepa,caca,pito,lata,tijera,gandul,piano,mente,labios,trago,pelota,corneta,pipote,papaya,tanga,estufa,mesa,tomate,lentejas,maleta,perico,calor,planta,cuadro
-2:anciano,lengua,guayaba,guanabana,chancleta,parchate,mermelada,hemorroide,ratatopo,tuberculo,papanatas,atleta,manopla,carcamal,cangrejo,saltamontes,computador,tempestad,edificio,guitarra,balonazo,hojaldra
-3:tangamandapio,estreñimiento,genoprasol,gastritis,ferrocarril,palabra,fácil,tulipán,acetaminofen,pancreas,salamandra,carateca,pintucarita,difenreciable,sinceridad,trompeta,mantequilla,lavadora
-4:esófago,agüita,ácido,remuneración,enclosador,bilingüe,diferenciabilidad,invertebrado,terrícola,sibarita,sífilis,papiloma,lombricompost,tractomula,esternón,diafragma,galardon,caramelo,esternocleidomastoideo

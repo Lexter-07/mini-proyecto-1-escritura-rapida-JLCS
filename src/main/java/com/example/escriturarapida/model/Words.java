@@ -8,10 +8,9 @@ import java.util.*;
 
 public class Words implements IWord{
     private String[] words;
-    //Random random;
     int positionWord;
     public Words(){
-        words = new String[40];
+        words = new String[50];
 
         words[0] = "cimarron";
         words[1] = "carne";
@@ -53,6 +52,16 @@ public class Words implements IWord{
         words[37] = "ferrocaril";
         words[38] = "chamo";
         words[39] = "contingencia";
+        words[40] = "botella";
+        words[41] = "Serpiente";
+        words[42] = "recorcholis";
+        words[43] = "Barricada";
+        words[44] = "Zombie";
+        words[45] = "interrogación";
+        words[46] = "fácil";
+        words[47] = "frialdad";
+        words[48] = "bicicleta";
+        words[49] = "eucalipto";
     }
 
 
@@ -60,7 +69,7 @@ public class Words implements IWord{
     @Override
     public String generateWord() {
         Random random = new Random();
-        positionWord = random.nextInt(29);
+        positionWord = random.nextInt(50);
 
         return words[positionWord];
     }
@@ -68,7 +77,7 @@ public class Words implements IWord{
     @Override
     public Boolean validateWord(String word) {
 
-        return word.equalsIgnoreCase(words[positionWord]);
+        return word.equals(words[positionWord]);
     }
 
 }
