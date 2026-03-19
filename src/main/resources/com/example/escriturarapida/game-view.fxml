@@ -153,5 +153,13 @@
             </Label>
          </children>
       </VBox>
+      <Button fx:id="exitGameButton" layoutX="522.0" layoutY="354.0" mnemonicParsing="false" style="-fx-background-color: Null;" text="Salir" textFill="#b2b2b2">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

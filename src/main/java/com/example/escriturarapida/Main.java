@@ -1,7 +1,7 @@
 package com.example.escriturarapida;
 
-import com.example.escriturarapida.view.GameStage;
 import com.example.escriturarapida.view.Path;
+import com.example.escriturarapida.view.SceneManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -18,7 +18,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        new GameStage();
+
+        new SceneManager(primaryStage);
+
+        SceneManager.changeScene(Path.EscrituraRapidaMenuView);
+        primaryStage.setTitle("Escritura Rápida");
+        primaryStage.setOnCloseRequest(e -> System.exit(0));
     }
 
 }

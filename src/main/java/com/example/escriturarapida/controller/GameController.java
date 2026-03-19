@@ -6,6 +6,7 @@ import com.example.escriturarapida.model.IWord;
 import com.example.escriturarapida.model.Levels;
 import com.example.escriturarapida.model.Words;
 import com.example.escriturarapida.view.Path;
+import com.example.escriturarapida.view.SceneManager;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
@@ -36,8 +37,8 @@ public class GameController {
     @FXML  // ID Button
     private Button validateButton;
 
-    @FXML //  ID Button Reset
-    private Button ResetButton;
+    @FXML //  ID Button exitGame
+    private Button exitGameButton;
 
     @FXML  //ID timeLabel
     private Label timeLabel;
@@ -54,18 +55,21 @@ public class GameController {
 
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         words = new Words();
         levels = new Levels();
 
         wordLabel.setText(words.generateWord());
+        levels.resetGame();
         startTimer();
+        exitGameButton.setOnAction(e -> exitGame());
     }
 
-    public void startTimer(){
+    public void startTimer() {
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-            TimeLeft--;timeLabel.setText("" + TimeLeft);
-            if (TimeLeft <=5){
+            TimeLeft--;
+            timeLabel.setText("" + TimeLeft);
+            if (TimeLeft <= 5) {
                 timeLabel.setTextFill(Color.RED);
             }
 
@@ -77,17 +81,19 @@ public class GameController {
         timeline.play();
     }
 
-    public void resetTimer(){
+    public void resetTimer() {
         TimeLeft = levels.timeForLevel();
         timeLabel.setTextFill(Color.web("#eeff00"));
         timeLabel.setText("" + TimeLeft);
     }
 
-    public void transitionValidateWord(){
+    public void transitionValidateWord() {
         signLabel.setVisible(true);
         PauseTransition pausa = new PauseTransition(Duration.seconds(2));
 
-        pausa.setOnFinished(ActionEvent -> {signLabel.setVisible(false);});
+        pausa.setOnFinished(ActionEvent -> {
+            signLabel.setVisible(false);
+        });
         pausa.play();
     }
 
@@ -96,20 +102,21 @@ public class GameController {
         validateButton.fire();
     }
 
-
-
     @FXML  // Event generated when the button has clicked
-    public void onHandleValidate(ActionEvent event) throws InterruptedException {
+    public void onHandleValidate(ActionEvent event) throws IOException {
 
         String text = wordTextField.getText();
 
         System.out.println("Validando...");
-        if (words.validateWord(text)){
+        if (words.validateWord(text)) {
             signLabel.setText(" CORRECTO ");
             signLabel.setTextFill(Color.web("#00ff4d"));
             transitionValidateWord();
 
             levelLabel.setText("NIVEL " + levels.levelUp());
+            resetTimer();
+            wordTextField.clear();
+            wordLabel.setText(words.generateWord());
 
         } else {
             signLabel.setText(" INCORRECTO ");
@@ -117,24 +124,33 @@ public class GameController {
             transitionValidateWord();
 
             levels.resetGame();
-            levelLabel.setText("NIVEL "+ levels.ActualLevel);
-
+            timeline.stop();
+            finishGame();
         }
+    }
 
-        resetTimer();
-        wordTextField.clear();
-
-        wordLabel.setText(words.generateWord());
-
+    public void finishGame() {
+        try {
+            ResultsController.setScore(levels.score);
+            SceneManager.changeScene(Path.EscrituraRapidaResultsView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void onHandleReset(ActionEvent event) throws IOException {
         levels.resetGame();
         resetTimer();
+        timeline.stop();
         wordTextField.clear();
-        levelLabel.setText("NIVEL "+ levels.ActualLevel);
+        levelLabel.setText("NIVEL " + levels.ActualLevel);
+
+        SceneManager.changeScene(Path.EscrituraRapidaMenuView);
+
     }
+
+    private void exitGame(){System.exit(0);}
 
 }
 

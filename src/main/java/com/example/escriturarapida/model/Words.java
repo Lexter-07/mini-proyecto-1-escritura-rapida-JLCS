@@ -10,7 +10,7 @@ public class Words implements IWord{
     private String[] words;
     int positionWord;
     public Words(){
-        words = new String[50];
+        words = new String[80];
 
         words[0] = "cimarron";
         words[1] = "carne";
@@ -22,13 +22,13 @@ public class Words implements IWord{
         words[7] = "tangamandapio";
         words[8] = "esternocleidomastoideo";
         words[9] = "lengua";
-        words[10] = "cerdo";
+        words[10] = "Cerdo";
         words[11] = "estreñimiento";
         words[12] = "baldosa";
         words[13] = "chancleta";
         words[14] = "arepa";
         words[15] = "tijera";
-        words[16] = "reja";
+        words[16] = "Reja";
         words[17] = "lentejas";
         words[18] = "parchate";
         words[19] = "anciano";
@@ -39,7 +39,7 @@ public class Words implements IWord{
         words[24] = "atleta";
         words[25] = "tulipan";
         words[26] = "estrambotico";
-        words[27] = "palabra";
+        words[27] = "Palabra";
         words[28] = "tuberculo";
         words[29] = "acetaminofen";
         words[30] = "manteca";
@@ -49,7 +49,7 @@ public class Words implements IWord{
         words[34] = "bilingüe";
         words[35] = "vidrio";
         words[36] = "menticol";
-        words[37] = "ferrocaril";
+        words[37] = "ferrocarril";
         words[38] = "chamo";
         words[39] = "contingencia";
         words[40] = "botella";
@@ -62,6 +62,19 @@ public class Words implements IWord{
         words[47] = "frialdad";
         words[48] = "bicicleta";
         words[49] = "eucalipto";
+        words[50] = "Escoba";
+        words[51] = "estuFa";
+        words[52] = "reconocer";
+        words[53] = "arma la casa";
+        words[54] = "Caracol";
+        words[55] = "balcón";
+        words[56] = "paletaS";
+        words[57] = "Locura";
+        words[58] = "estofado";
+        words[59] = "Hola, como estas?";
+        words[60] = "trasteo";
+        words[61] = "destornillador";
+        words[62] = "hermano";
     }
 
 
@@ -69,7 +82,7 @@ public class Words implements IWord{
     @Override
     public String generateWord() {
         Random random = new Random();
-        positionWord = random.nextInt(50);
+        positionWord = random.nextInt(63);
 
         return words[positionWord];
     }

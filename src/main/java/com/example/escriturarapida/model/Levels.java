@@ -2,17 +2,19 @@ package com.example.escriturarapida.model;
 
 public class Levels implements ILevels {
     public int ActualLevel = 1;
-    private int BaseTime = 20;
-    private int Successes = 0;
+    public int score = 0;
+    private int baseTime = 20;
+    private int successes = 0;
 
 
     @Override
     public int levelUp() {
         ActualLevel += 1;
-        if (Successes < 5) {
-            Successes += 1;
+        score += 1;
+        if (successes < 5) {
+            successes += 1;
         } else {
-            Successes = 0;
+            successes = 0;
         }
 
         return ActualLevel;
@@ -21,17 +23,17 @@ public class Levels implements ILevels {
     @Override
     public void resetGame() {
         ActualLevel = 1;
-        BaseTime = 20;
-        Successes = 0;
+        baseTime = 20;
+        successes = 0;
 
     }
 
     @Override
     public int timeForLevel(){
-        if (Successes == 5){
-            BaseTime -= 2;
+        if (successes == 5){
+            baseTime -= 2;
         }
-        return BaseTime;
+        return baseTime;
     }
 
 }

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escriturarapida.controller.MenuController">
+   <children>
+      <ImageView fitHeight="407.0" fitWidth="639.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/fondo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="189.0" layoutY="34.0" text="ESCRITURA RÁPIDA">
+         <font>
+            <Font name="Segoe UI Semibold" size="25.0" />
+         </font>
+         <textFill>
+            <LinearGradient cycleMethod="REPEAT" endX="0.5545023696682465" endY="0.9715639810426541" startX="0.5545023696682465">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.43921568989753723" green="0.04313725605607033" blue="0.12156862765550613" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <effect>
+            <Bloom />
+         </effect>
+      </Label>
+      <VBox alignment="TOP_CENTER" layoutX="74.0" layoutY="68.0" prefHeight="200.0" prefWidth="454.0" spacing="7.0">
+         <children>
+            <Label text="Instrucciones:" textFill="#eeff00" translateY="6.0">
+               <font>
+                  <Font name="Segoe UI Semibold" size="18.0" />
+               </font>
+            </Label>
+            <Label />
+            <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="61.0" layoutY="114.0" prefHeight="20.0" prefWidth="352.0" text="- Escribe la palabra mostrada en pantalla exactamente" textFill="#e6ff00">
+               <font>
+                  <Font name="Segoe UI Semibold" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_CENTER" layoutX="61.0" layoutY="134.0" prefHeight="20.0" prefWidth="352.0" text="igual (mayúsculas, tildes, espacios)." textFill="#e6ff00" translateY="-10.0">
+               <font>
+                  <Font name="Segoe UI Semibold" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_CENTER" text="- Para validar: presiona           o el Botón de validar" textFill="#e6ff00">
+               <font>
+                  <Font name="Segoe UI Semibold" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_CENTER" text="- Tienes      segundos para escribir la palabra" textFill="#e6ff00">
+               <font>
+                  <Font name="Segoe UI Semibold" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_CENTER" text="- Si aciertas, el nivel y la dificultad (velocidad) aumenta" textFill="#e6ff00">
+               <font>
+                  <Font name="Segoe UI Semibold" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_CENTER" layoutX="63.0" layoutY="94.0" text="- El juego               al cometer un error o si el tiempo llega a cero." textFill="#e6ff00">
+               <font>
+                  <Font name="Segoe UI Semibold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <effect>
+            <Glow level="0.5" />
+         </effect>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="170.0" layoutY="280.0" prefHeight="92.0" prefWidth="261.0" spacing="30.0">
+         <children>
+            <Button fx:id="playButton" defaultButton="true" mnemonicParsing="false" style="-fx-background-color: #700B1F; -fx-border-color: gray; -fx-border-radius: 120; -fx-background-radius: 40;" text=" Iniciar " textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <InnerShadow>
+                     <input>
+                        <Bloom>
+                           <input>
+                              <Lighting diffuseConstant="1.6" specularConstant="0.5" specularExponent="40.0" surfaceScale="1.96">
+                                 <bumpInput>
+                                    <Shadow />
+                                 </bumpInput>
+                                 <light>
+                                    <Light.Distant />
+                                 </light>
+                              </Lighting>
+                           </input>
+                        </Bloom>
+                     </input>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="exitButton" layoutX="83.0" layoutY="32.0" mnemonicParsing="false" style="-fx-background-color: #700B1F; -fx-border-color: gray; -fx-border-radius: 120; -fx-background-radius: 40;" text="  Salir  " textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <InnerShadow height="50.31" radius="17.3275">
+                     <input>
+                        <Lighting diffuseConstant="1.15" specularConstant="0.83" specularExponent="39.08" surfaceScale="1.96">
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </input>
+                  </InnerShadow>
+               </effect>
+            </Button>
+         </children>
+      </HBox>
+      <Label alignment="TOP_CENTER" layoutX="291.0" layoutY="180.0" text="Enter" textFill="#00fbff">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_CENTER" layoutX="214.0" layoutY="207.0" text="20" textFill="#00fbff">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_CENTER" layoutX="160.0" layoutY="261.0" text="acabará" textFill="#00fbff">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+         <effect>
+            <Glow />
+         </effect>
+      </Label>
+   </children>
+</AnchorPane>
