@@ -14,17 +14,18 @@ public class ResultsController {
     @FXML
     private Label scoreLabel;
 
-    @FXML
-    private Button playAgainButton;
+    @FXML Label messageLabel;
 
     @FXML
     private Button exitButton;
 
+    private static String messageFinal;
     private static int finalScore = 0;
 
     @FXML
     private void initialize() {
         scoreLabel.setText("Niveles Superados: " + finalScore);
+        messageLabel.setText(messageFinal);
         exitButton.setOnAction(e -> exitGame());
     }
 
@@ -39,6 +40,10 @@ public class ResultsController {
     }
 
     private void exitGame(){System.exit(0);}
+
+    public static void setMessageFinal(String message){
+        messageFinal = message;
+    }
 
     public static void setScore(int score) {
         finalScore = score;

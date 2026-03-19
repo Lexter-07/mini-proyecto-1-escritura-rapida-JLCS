@@ -17,7 +17,6 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escriturarapida.controller.ResultsController">
    <children>
       <ImageView fitHeight="408.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
@@ -25,7 +24,7 @@
             <Image url="@images/fondo.png" />
          </image>
       </ImageView>
-      <Label layoutX="188.0" layoutY="73.0" text="GAME OVER">
+      <Label layoutX="188.0" layoutY="54.0" text="GAME OVER">
          <font>
             <Font name="Segoe UI Semibold" size="40.0" />
          </font>
@@ -49,12 +48,7 @@
             <Glow level="0.58" />
          </effect>
       </Label>
-      <Label fx:id="scoreLabel" layoutX="218.0" layoutY="160.0" text="Niveles superados: 0" textFill="#eeff00">
-         <font>
-            <Font name="Segoe UI Semibold" size="18.0" />
-         </font>
-      </Label>
-      <VBox alignment="CENTER" layoutX="178.0" layoutY="201.0" prefHeight="174.0" prefWidth="244.0" spacing="7.0">
+      <VBox alignment="CENTER" layoutX="178.0" layoutY="234.0" prefHeight="141.0" prefWidth="244.0" spacing="7.0">
          <children>
             <Button layoutX="67.0" layoutY="58.0" mnemonicParsing="false" onAction="#onHandlePlayAgain" style="-fx-background-color: #700B1F; -fx-border-color: gray; -fx-border-radius: 120; -fx-background-radius: 40;" text="Volver a Jugar" textFill="WHITE">
                <font>
@@ -111,6 +105,25 @@
                   <InnerShadow radius="12.93" width="32.72" />
                </effect>
             </Button>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="135.0" layoutY="112.0" prefHeight="123.0" prefWidth="331.0">
+         <children>
+            <Label fx:id="messageLabel" text="El tiempo se agotó :(" textFill="#dddddd">
+               <font>
+                  <Font name="Segoe UI Semibold" size="21.0" />
+               </font>
+            </Label>
+            <Label fx:id="scoreLevelLabel" textFill="#eeff00">
+               <font>
+                  <Font name="Segoe UI Semibold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="scoreLabel" text="Puntuación: 0" textFill="#eeff00">
+               <font>
+                  <Font name="Segoe UI Semibold" size="18.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
    </children>

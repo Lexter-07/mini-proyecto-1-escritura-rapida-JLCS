@@ -3,8 +3,10 @@ package com.example.escriturarapida.model;
 public class Levels implements ILevels {
     public int ActualLevel = 1;
     public int score = 0;
+    public int fails = 0;
     private int baseTime = 20;
     private int successes = 0;
+
 
 
     @Override

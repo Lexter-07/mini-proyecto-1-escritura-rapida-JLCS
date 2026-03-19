@@ -49,6 +49,7 @@ public class GameController {
     private Words words;
     private Levels levels;
 
+    public String message;
     private Timeline timeline;
     private final int InitialTime = 20;
     private int TimeLeft = InitialTime;
@@ -59,7 +60,7 @@ public class GameController {
         words = new Words();
         levels = new Levels();
 
-        wordLabel.setText(words.generateWord());
+        wordLabel.setText(words.generateWord(levels.ActualLevel));
         levels.resetGame();
         startTimer();
         exitGameButton.setOnAction(e -> exitGame());
@@ -116,26 +117,32 @@ public class GameController {
             levelLabel.setText("NIVEL " + levels.levelUp());
             resetTimer();
             wordTextField.clear();
-            wordLabel.setText(words.generateWord());
+            wordLabel.setText(words.generateWord(levels.ActualLevel));
 
         } else {
-            signLabel.setText(" INCORRECTO ");
-            signLabel.setTextFill(Color.RED);
-            transitionValidateWord();
-
-            levels.resetGame();
+            if (!text.isEmpty()) {
+                signLabel.setText(" INCORRECTO ");
+                signLabel.setTextFill(Color.RED);
+                transitionValidateWord();
+            }
             timeline.stop();
+            MessageFail();
             finishGame();
         }
     }
 
-    public void finishGame() {
-        try {
-            ResultsController.setScore(levels.score);
-            SceneManager.changeScene(Path.EscrituraRapidaResultsView);
-        } catch (IOException e) {
-            e.printStackTrace();
+    void MessageFail(){
+        if (TimeLeft <= 0) {
+            message = "¡El tiempo se agotó! :(";
+        } else {
+            message = "Has fallado la palabra";
         }
+    }
+
+    public void finishGame() {
+        ResultsController.setScore(levels.score);
+        ResultsController.setMessageFinal(message);
+        SceneManager.changeSceneWithDelay(Path.EscrituraRapidaResultsView, 700);
     }
 
     @FXML

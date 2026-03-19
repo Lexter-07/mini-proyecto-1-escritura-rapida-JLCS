@@ -26,6 +26,28 @@ public class SceneManager {
         stage.show();
     }
 
+    public static void changeSceneWithDelay(String fxmlFileName, int delayMillis) {
+        new Thread(() -> {
+            try {
+                Thread.sleep(delayMillis);
+
+                javafx.application.Platform.runLater(() -> {
+                    try {
+                        Parent newRoot = FXMLLoader.load(Objects.requireNonNull(
+                                SceneManager.class.getResource(fxmlFileName)
+                        ));
+                        Scene newScene = new Scene(newRoot);
+                        stage.setScene(newScene);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
 
     public static Stage getStage() {
         return stage;
