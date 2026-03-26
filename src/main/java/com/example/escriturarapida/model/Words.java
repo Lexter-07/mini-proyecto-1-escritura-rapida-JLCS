@@ -1,11 +1,32 @@
 package com.example.escriturarapida.model;
 
-import java.util.*;
+import java.util.Random;
 
-public class Words implements IWord{
+/**
+ * Handles word generation and validation for the typing game.
+ * .
+ * This class provides a collection of predefined words and is responsible
+ * for selecting a random word based on the current difficulty level.
+ * It also validates whether the user's input matches the generated word.
+ * .
+ * The difficulty increases progressively by selecting words from different
+ * ranges of the array depending on the player's level.
+ */
+public class Words implements IWords{
+
+    /**
+     * Array containing all available words for the game.
+     */
     private String[] words;
+
+    /**
+     * Stores the index of the currently selected word.
+     */
     int positionWord;
 
+    /**
+     * Initializes the word list used in the game.
+     */
     public Words(){
         words = new String[120];
 
@@ -109,16 +130,26 @@ public class Words implements IWord{
         words[97] = "Fusil Barrett M82";
         words[98] = "que seria pizzería";
         words[99] = "corniza que aprisa";
-        words[100] = "FeliciTacionEs";
+        words[100] = "Felicitaciones";
         words[101] = "contabilidad";
-        words[102] = "águila agarra al ñucla";
+        words[102] = "agarra al ñucla";
         words[103] = "Garganta";
         words[104] = "Destrucción";
         words[105] = "cañaveralejo";
     }
 
 
-    // GENERA LA PALABRA A ESCRIBIRSE.
+    /**
+     * Generates a random word based on the current difficulty level.
+     * .
+     * The word selection is divided into ranges:
+     * - Easy levels (< 15): simple words (lower indices)
+     * - Medium levels (15–29): intermediate words
+     * - Advanced levels (30+): more complex or longer words and sentences
+     *
+     * @param ActualLevel the current level of the player
+     * @return a randomly selected word according to the difficulty
+     */
     @Override
     public String generateWord(int ActualLevel) {
         Random random = new Random();
@@ -133,6 +164,12 @@ public class Words implements IWord{
         return words[positionWord];
     }
 
+    /**
+     * Validates if the user's input matches the previously generated word.
+     *
+     * @param word the word entered by the user
+     * @return 'true' if the input matches the expected word, 'false' otherwise
+     */
     @Override
     public Boolean validateWord(String word) {
 
