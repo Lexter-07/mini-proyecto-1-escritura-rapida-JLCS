@@ -16,7 +16,7 @@ import java.io.IOException;
  * The application allows users to practice and improve their typing speed
  * through a minigame with progressive difficulty and an interactive graphical interface.
  * .
- * Project1|: Fast Typing Game
+ * MiniProject1: Fast Typing Game
  *
  * @author Jorge Luis Castro Scarpetta - 2517065
  * @version 1.0

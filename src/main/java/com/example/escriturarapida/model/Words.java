@@ -28,7 +28,7 @@ public class Words implements IWords{
      * Initializes the word list used in the game.
      */
     public Words(){
-        words = new String[120];
+        words = new String[111];
 
         words[0] = "cimarrón";
         words[1] = "carne";
@@ -91,51 +91,56 @@ public class Words implements IWords{
         words[58] = "pintucarita";
         words[59] = "Hola, como estas?";
         words[60] = "tangamandapio";
-        words[61] = "destornillador";
+        words[61] = "soberbia";
         words[62] = "esternocleidomastoideo";
         words[63] = "Estantería";
         words[64] = "paralilepípedo";
         words[65] = "Invertebrado";
         words[66] = "Profesionalidad";
-        words[67] = "diferenciabilidad";
+        words[67] = "contabilidad";
         words[68] = "lechuga, tomate y agua";
         words[69] = "Confía en ti";
         words[70] = "Rastreador";
         words[71] = "acetaminofen";
         words[72] = "Corrupción";
         words[73] = "Calentamiento";
-        words[74] = "Hipersensibilidad";
-        words[75] = "perimenopaucia";
+        words[74] = "Garganta";
+        words[75] = "atmósfera";
         words[76] = "tartamudeo";
         words[77] = "Baloncesto";
-        words[78] = "electromagnético";
+        words[78] = "Destrucción";
         words[79] = "hipotermia";
         words[80] = "guarda el computador";
-        words[81] = "cuidado con dar papaya";
+        words[81] = "cuidado al dar papaya";
         words[82] = "hiperventilador";
         words[83] = "tractomula en mi calzón";
         words[84] = "otorrinolarringólogo";
-        words[85] = "ácido desocirribonucleico";
+        words[85] = "internacional";
         words[86] = "semiautomático";
-        words[87] = "desacoplamiento";
+        words[87] = "Desacoplamiento";
         words[88] = "40 kilogramos de arroz";
         words[89] = "patología";
         words[90] = "paradigmas enigmáticos";
-        words[91] = "Paquito con poquito";
+        words[91] = "paquito con poquito";
         words[92] = "Madriguera";
         words[93] = "Destraba-lenguas";
-        words[94] = "FinAliZar";
+        words[94] = "finAliZar";
         words[95] = "Desbotellado";
-        words[96] = "María chuchena choza";
-        words[97] = "Fusil Barrett M82";
+        words[96] = "Estancamiento";
+        words[97] = "Fusil de asalto";
         words[98] = "que seria pizzería";
         words[99] = "corniza que aprisa";
         words[100] = "Felicitaciones";
-        words[101] = "contabilidad";
+        words[101] = "diferenciabilidad";
         words[102] = "agarra al ñucla";
-        words[103] = "Garganta";
-        words[104] = "Destrucción";
-        words[105] = "cañaveralejo";
+        words[103] = "Hipersensibilidad";
+        words[104] = "electromagnético";
+        words[105] = "Cañaveralejo";
+        words[106] = "Testarudo";
+        words[107] = "Destornillador";
+        words[108] = "ovovivíparo";
+        words[109] = "extratosfera";
+        words[110] = "perimenopaucia";
     }
 
 
@@ -156,9 +161,9 @@ public class Words implements IWords{
         if (ActualLevel < 15){
             positionWord = random.nextInt(40);
         } else if (ActualLevel >= 15 && ActualLevel < 30){
-            positionWord = random.nextInt(35, 80);
+            positionWord = random.nextInt(40, 80);
         } else {
-            positionWord = random.nextInt(60, 106);
+            positionWord = random.nextInt(60, 111);
         }
 
         return words[positionWord];

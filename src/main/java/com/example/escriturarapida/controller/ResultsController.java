@@ -30,11 +30,33 @@ public class ResultsController {
     @FXML
     private Label messageLabel;
     /**
+     * Label displayed when the player loses the game.
+     *
+     * This label shows a "Game Over" message and is visible
+     * only when the player fails.
+     */
+    @FXML
+    private Label gameOverLabel;
+    /**
+     * Label displayed when the player wins the game.
+     *
+     * This label shows a victory message and is visible
+     * only when the player successfully completes the game.
+     */
+    @FXML
+    private Label winTitleLabel;
+
+    /**
      * Button used to exit the application.
      */
     @FXML
     private Button exitButton;
 
+
+    /**
+     * Indicates whether the player has won the game.
+     */
+    public static boolean isPlayerWinner;
     /**
      * Final message passed from the game controller.
      */
@@ -45,14 +67,21 @@ public class ResultsController {
     private static int finalScore = 0;
 
 
+
     /**
-     * Initializes the results screen.
+     * Initializes the results view after the FXML file is loaded.
+     * .
+     * This method sets up the UI elements with the final game data:
+     * - Displays the appropriate title (win or game over)
+     * - Shows the final score (levels completed)
+     * - Displays the final message based on the game outcome
+     * - Assigns the action to the exit button.
      *
-     * This method sets the final score and message,
-     * and configures button actions.
+     * It is automatically called by the JavaFX framework.
      */
     @FXML
     private void initialize() {
+        setEndGameTitle(isPlayerWinner);
         scoreLabel.setText("Niveles Superados: " + finalScore);
         messageLabel.setText(messageFinal);
         exitButton.setOnAction(e -> exitGame());
@@ -78,6 +107,28 @@ public class ResultsController {
     @FXML
     public void onHandleGoMenu(ActionEvent event) throws IOException {
         SceneManager.changeScene(Path.EscrituraRapidaMenuView);
+    }
+
+    /**
+     * Updates the result screen title based on the game outcome.
+     * .
+     * This method controls the visibility of the title labels:
+     * - If the player wins, the "win" title is displayed
+     * - If the player loses, the "game over" title is displayed.
+     *
+     * It ensures that only one title is visible at a time.
+     *
+     * @param isPlayerWinner true if the player has won the game,
+     * false if the player has lost
+     */
+    public void setEndGameTitle(boolean isPlayerWinner){
+        if (isPlayerWinner) {
+            winTitleLabel.setVisible(true);
+            gameOverLabel.setVisible(false);
+        } else {
+            winTitleLabel.setVisible(false);
+            gameOverLabel.setVisible(true);
+        }
     }
 
     /**

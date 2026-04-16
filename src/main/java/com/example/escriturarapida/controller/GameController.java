@@ -74,6 +74,7 @@ public class GameController {
     @FXML
     private Label levelLabel;
 
+
     /**
      * Handles word generation and validation.
      */
@@ -88,21 +89,28 @@ public class GameController {
      * Timeline used as a countdown timer.
      */
     private Timeline timeline;
-
     /**
      * Initial time for the game (in seconds).
      */
     private final int InitialTime = 20;
-
     /**
      * Remaining time for the current round.
      */
     private int TimeLeft = InitialTime;
-
     /**
      * Final message displayed when the game ends.
      */
     public String message;
+
+    /**
+     * Indicates whether the player has won the game.
+     * This variable remains true while the player continues progressing without failing
+     * It is set to false when the player makes a mistake or loses the game.
+     *
+     * It is used to determine the final game outcome (win or loss).
+     */
+    public boolean isPlayerWinner = true;
+
 
 
     /**
@@ -149,7 +157,7 @@ public class GameController {
     /**
      * This method resets the timer based on the current level difficulty
      * and restores the original color of time.
-     *
+     * .
      * The available time may decrease as the player progresses.
      */
     public void resetTimer() {
@@ -160,7 +168,7 @@ public class GameController {
 
     /**
      * This Method shows temporary feedback after validation.
-     *
+     * .
      * Shows a message (correct/incorrect) for a short duration
      * and then hides it automatically.
      */
@@ -176,7 +184,7 @@ public class GameController {
 
     /**
      * Triggered when the user presses ENTER in the text field.
-     *
+     * .
      * This method simulates a button click for validation.
      *
      * @param event the action event triggered by pressing ENTER
@@ -187,21 +195,29 @@ public class GameController {
     }
 
     /**
-     * This method handles the validation of the typed word.
+     * This method Handles the validation of the typed word.
+     * .
+     * This triggered when the user submits a word (via button or ENTER).
+     * It validates the input and updates the game state accordingly.
+     * .
+     * Behavior:
+     * - If the word is correct:
+     *   - Displays success feedback
+     *   - Checks if the player has reached the maximum level (45)
+     *     - If NOT: increases level, resets timer, and generates a new word
+     *     - If YES: stops the game and triggers the win condition
      *
-     * If the word is correct:
-     * - Displays success feedback
-     * - Increases level and score
-     * - Resets timer
-     * - Generates a new word
+     * - If the word is incorrect or empty:
+     *   - Displays error feedback (if applicable)
+     *   - Marks the player as having lost
+     *   - Stops the game and triggers the end condition
+     * .
+     * The game ends in two cases:
+     * - Player loses (incorrect input or timeout)
+     * - Player wins (reaches level 45)
      *
-     * If the word is incorrect:
-     * - Displays error feedback
-     * - Stops the timer
-     * - Ends the game
-     *
-     * @param event the action event triggered by the button
-     * @throws IOException if scene transition fails
+     * @param event the action event triggered by the validate button
+     * @throws IOException if the scene transition fails
      */
     @FXML  // Event generated when the button has clicked
     public void onHandleValidate(ActionEvent event) throws IOException {
@@ -209,36 +225,56 @@ public class GameController {
         String text = wordTextField.getText();
 
         System.out.println("Validando...");
+
+
         if (words.validateWord(text)) {
             signLabel.setText(" CORRECTO ");
             signLabel.setTextFill(Color.web("#00ff4d"));
             transitionValidateWord();
 
-            levelLabel.setText("NIVEL " + levels.levelUp());
-            resetTimer();
-            wordTextField.clear();
-            wordLabel.setText(words.generateWord(levels.ActualLevel));
+
+            if (levels.ActualLevel != levels.MAX_LEVEL) {
+                levelLabel.setText("NIVEL " + levels.levelUp());
+                resetTimer();
+                wordTextField.clear();
+                wordLabel.setText(words.generateWord(levels.ActualLevel));
+            } else {
+                timeline.stop();
+                messageFinal();
+                finishGame();
+            }
 
         } else {
             if (!text.isEmpty()) {
                 signLabel.setText(" INCORRECTO ");
                 signLabel.setTextFill(Color.RED);
                 transitionValidateWord();
-            }
+                isPlayerWinner = false;
+            } else if (text.isEmpty()) {isPlayerWinner = false;}
+
             timeline.stop();
-            MessageFail();
+            messageFinal();
             finishGame();
         }
+
     }
 
     /**
-     * Determines the final message shown when the player loses.
+     * This method Determines the final message displayed at the end of the game.
+     * .
+     * evaluates the game state and assigns a message based on the outcome:
      *
-     * The message depends on whether the failure was due to
-     * time running out or incorrect input.
+     * - Victory: The player reaches the maximum level (45) and has not failed
+     * - Time out: The player runs out of time
+     * - Incorrect input: The player fails to type the correct word
+     * .
+     * The result is stored in the {@code message} variable, which is later
+     * displayed in the results screen.
      */
-    void MessageFail(){
-        if (TimeLeft <= 0) {
+    void messageFinal(){
+        if (levels.ActualLevel >= levels.MAX_LEVEL && isPlayerWinner) {
+            message = "Llegaste al nivel Máximo";
+        } else if (TimeLeft <= 0) {
             message = "¡El tiempo se agotó! :(";
         } else {
             message = "Has fallado la palabra";
@@ -247,10 +283,18 @@ public class GameController {
 
     /**
      * This Method ends the game and transitions to the results screen.
+     * .
+     * This method is responsible for passing the final game data to the
+     * results controller, including:
+     * - Whether the player won or lost
+     * - The final score (levels completed)
+     * - The final message describing the outcome
      *
-     * Sends the final score and message to the controller results.
+     * After setting this data, it triggers a scene change to the results view
+     * with a short delay, allowing any final UI feedback to be displayed.
      */
     public void finishGame() {
+        ResultsController.isPlayerWinner = isPlayerWinner;
         ResultsController.setScore(levels.score);
         ResultsController.setMessageFinal(message);
         SceneManager.changeSceneWithDelay(Path.EscrituraRapidaResultsView, 750);

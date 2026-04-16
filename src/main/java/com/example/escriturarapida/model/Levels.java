@@ -22,6 +22,10 @@ public class Levels implements ILevels {
      */
     public int ActualLevel = 1;
     /**
+     * This constant indicates the maximum level that the player can reach in the game.
+     */
+    public final int MAX_LEVEL = 45;
+    /**
      * Player score based on correct words
      */
     public int score = 0;
